@@ -14,9 +14,7 @@ import com.spring.greencampus.ems.mainapp.entity.SensorData;
 
 @Repository
 @Transactional
-public class SensorDataDao {
-	@Autowired
-	SensorDataRepository sensorDataRepository;	
+public class CustomSensorInterfaceImpl implements CustomSensorInterface{
 	@PersistenceContext
 	private EntityManager entityManager;
 	public List<SensorData> returnAllentities(){
@@ -26,14 +24,4 @@ public class SensorDataDao {
 		return entityManager.merge(sensorData);
 	} 
 	
-	public List<SensorData> findById(long id){
-		return sensorDataRepository.findById(id);
-	}
-	
-	public List<SensorData> findByTimestamp(Date timestamp){
-		return sensorDataRepository.findByTimestamp(timestamp);
-	}
-	public List<SensorData> findByTimeRange(Date start, Date end){
-		return sensorDataRepository.findByTimestampBetween(start, end);
-	}
 }
