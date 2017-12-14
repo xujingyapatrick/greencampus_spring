@@ -14,6 +14,7 @@ public class SensorData {
 	@Id
 	@GeneratedValue
 	private long id;
+	private int sensorId;
 	private double voltage;
 	private double current;
 	private double temperature;
@@ -24,9 +25,10 @@ public class SensorData {
 	public SensorData() {
 	}
 
-	public SensorData(long id, double voltage, double current, double temperature, double humidity, Date timestamp) {
+	public SensorData(long id, int sensorId, double voltage, double current, double temperature, double humidity, Date timestamp) {
 		super();
 		this.id = id;
+		this.sensorId=sensorId;
 		this.voltage = voltage;
 		this.current = current;
 		this.temperature = temperature;
@@ -34,8 +36,9 @@ public class SensorData {
 		this.timestamp = timestamp;
 	}
 	
-	public SensorData(double voltage, double current, double temperature, double humidity, Date timestamp) {
+	public SensorData(int sensorId, double voltage, double current, double temperature, double humidity, Date timestamp) {
 		super();
+		this.sensorId = sensorId;
 		this.voltage = voltage;
 		this.current = current;
 		this.temperature = temperature;
@@ -48,6 +51,17 @@ public class SensorData {
 	public void setId(long id) {
 		this.id = id;
 	}
+	
+
+
+	public int getSensorId() {
+		return sensorId;
+	}
+
+	public void setSensorId(int sensorId) {
+		this.sensorId = sensorId;
+	}
+
 	public double getVoltage() {
 		return voltage;
 	}
