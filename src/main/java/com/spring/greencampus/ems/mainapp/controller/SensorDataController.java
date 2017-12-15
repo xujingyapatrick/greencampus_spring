@@ -4,9 +4,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder.In;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +24,8 @@ import com.spring.greencampus.ems.mainapp.entity.SensorData;
 public class SensorDataController {
 	@Autowired
 	private CustomSensorRepository customRepo;
+	@Autowired
+	private Environment environment;
 
 	@RequestMapping("/sensordata")
 	public List<SensorData> getAllSensorData() {
@@ -74,6 +80,13 @@ public class SensorDataController {
 
 		sensordata.stream().forEach(c -> customRepo.updateEntity(c));
 		return sensordata;
+	}
+	@RequestMapping(value = "/ports", method = RequestMethod.GET)
+	public HashMap<String, String> getPortNumber() {
+		HashMap<String, String> map = new HashMap<>();
+		map.put("port", environment.getProperty("local.server.port"));
+		map.put("service name", "mainapp");
+		return map;
 	}
 
 }
